@@ -1,10 +1,10 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { AtTabBar } from 'taro-ui'
+import { AtTabBar, AtNoticebar, AtCard } from 'taro-ui'
 import './index.scss'
 
 // #region 书写注意
@@ -89,15 +89,35 @@ class Index extends Component {
     this.setState({
       current: value
     })
+    if (value == 1) {
+      Taro.redirectTo({
+        url: '/pages/wish/wish'
+      })
+    }
+
   }
   render() {
     return (
       <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+        <AtNoticebar icon='volume-plus'>
+          分享礼卷 | 人人为我 | 我为人人
+        </AtNoticebar>
+        <AtCard
+          note='Tips'
+          extra=''
+          title='礼卷分类'
+        >
+          图标
+        </AtCard>
+
+        <AtCard
+          note='Tips'
+          extra=''
+          title='平台统计'
+        >
+          <div>今日新增:xxx</div>
+          今日需求:xxx
+        </AtCard>
         <AtTabBar
           fixed
           tabList={[
