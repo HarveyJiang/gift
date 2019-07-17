@@ -7,6 +7,7 @@ import { add, minus, asyncAdd } from '../../actions/counter'
 import { AtTabBar, AtNoticebar, AtCard } from 'taro-ui'
 import './index.scss'
 
+
 // #region 书写注意
 //
 // 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
@@ -89,11 +90,11 @@ class Index extends Component {
     this.setState({
       current: value
     })
-    if (value == 1) {
-      Taro.redirectTo({
-        url: '/pages/wish/wish'
-      })
-    }
+    // if (value == 1) {
+    //   Taro.redirectTo({
+    //     url: '/pages/me/me'
+    //   })
+    // }
 
   }
   render() {
@@ -118,13 +119,15 @@ class Index extends Component {
           <div>今日新增:xxx</div>
           今日需求:xxx
         </AtCard>
+
+        <view></view>
         <AtTabBar
           fixed
           tabList={[
             { title: '首页', iconType: 'home' },
             { title: '有卷', iconType: 'money' },
             { title: '要卷', iconType: 'shopping-bag' },
-            { title: '我的', iconType: 'home', dot: true }
+            { title: '我的', iconType: 'home'}
           ]}
           onClick={this.handleClick.bind(this)}
           iconSize={18}
