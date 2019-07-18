@@ -4,9 +4,13 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { AtTabBar, AtNoticebar, AtCard } from 'taro-ui'
+import { AtTabBar, AtNoticebar } from 'taro-ui'
 import './index.scss'
 
+import Home from '../home/home'
+import Me from '../me/me'
+import Gift from '../gift/gift'
+import Wish from '../wish/wish'
 
 // #region 书写注意
 //
@@ -68,11 +72,13 @@ class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
+
   constructor() {
     super(...arguments)
     this.state = {
       current: 0
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,48 +92,42 @@ class Index extends Component {
   componentDidHide() { }
 
   handleClick(value) {
-    console.log(value)
     this.setState({
       current: value
     })
-    // if (value == 1) {
-    //   Taro.redirectTo({
-    //     url: '/pages/me/me'
-    //   })
-    // }
 
   }
   render() {
+    // this.shows = [<Home />, <Gift />, <Wish />, <Me />]
+    // const show = [<Home />, <Gift />, <Wish />, <Me />][this.state.current]
+
+    let show
+    const index = this.state.current
+    if (index == 0) {
+      show = <Home />
+    }
+    else if (index == 1) {
+      show = <Gift />
+    } else if (index == 2) {
+      show = <Wish />
+    } else if (index == 3) {
+      show = <Me />
+    }
     return (
       <View className='index'>
         <AtNoticebar icon='volume-plus'>
           分享礼卷 | 人人为我 | 我为人人
         </AtNoticebar>
-        <AtCard
-          note='Tips'
-          extra=''
-          title='礼卷分类'
-        >
-          图标
-        </AtCard>
 
-        <AtCard
-          note='Tips'
-          extra=''
-          title='平台统计'
-        >
-          <div>今日新增:xxx</div>
-          今日需求:xxx
-        </AtCard>
+        {show}
 
-        <view></view>
         <AtTabBar
           fixed
           tabList={[
             { title: '首页', iconType: 'home' },
             { title: '有卷', iconType: 'money' },
             { title: '要卷', iconType: 'shopping-bag' },
-            { title: '我的', iconType: 'home'}
+            { title: '我的', iconType: 'home' }
           ]}
           onClick={this.handleClick.bind(this)}
           iconSize={18}

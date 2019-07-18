@@ -28,10 +28,10 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index',
-      'pages/gift/gift',
-      'pages/wish/wish',
-      'pages/me/me',
+      'pages/index/index'
+      // 'pages/gift/gift',
+      // 'pages/wish/wish',
+      // 'pages/me/me',
     ],
     window: {
       backgroundTextStyle: 'light',
