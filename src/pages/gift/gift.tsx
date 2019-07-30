@@ -1,10 +1,10 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, ScrollView, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { AtTabBar, AtList, AtListItem, AtSearchBar, AtPagination } from 'taro-ui'
+import { AtList, AtListItem, AtSearchBar, AtPagination } from 'taro-ui'
 import './gift.scss'
 
 // #region 书写注意
@@ -101,6 +101,9 @@ class Gift extends Component {
     console.log('开始搜索', this.state.sk)
   }
   render() {
+    const scrollStyle = {
+      height: '150px'
+    }
     return (
       <View className='index'>
         <AtSearchBar
@@ -109,8 +112,26 @@ class Gift extends Component {
           onChange={this.onChange.bind(this)}
           onActionClick={this.onActionClick.bind(this)}
         />
-        <AtList>
-          <AtListItem
+        
+          <AtList>
+            <AtListItem
+              title='京东-物品-100元'
+              arrow='down'
+              thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
+            />
+            <AtListItem
+              title='苏宁-其他-200元'
+              note='苏宁平台礼品卷,拼单'
+              arrow='down'
+              thumb='http://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+            />
+            <AtListItem
+              title='票 加油票 500元'
+              note='描述信息'
+              extraText='详情'
+              arrow='down'
+              thumb='http://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png'
+            /><AtListItem
             title='京东-物品-100元'
             arrow='down'
             thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
@@ -127,16 +148,34 @@ class Gift extends Component {
             extraText='详情'
             arrow='down'
             thumb='http://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png'
-          />
-        </AtList>
+          /><AtListItem
+          title='京东-物品-100元'
+          arrow='down'
+          thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
+        />
+        <AtListItem
+          title='苏宁-其他-200元'
+          note='苏宁平台礼品卷,拼单'
+          arrow='down'
+          thumb='http://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+        />
+        <AtListItem
+          title='票 加油票 500元'
+          note='描述信息'
+          extraText='详情'
+          arrow='down'
+          thumb='http://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png'
+        />
+          </AtList>
+        
         <AtPagination
           total={50}
           pageSize={10}
           current={1}
         >
         </AtPagination>
-        
-      </View>
+
+      </View >
     )
   }
 }

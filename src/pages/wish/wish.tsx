@@ -1,10 +1,10 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, Button,Text,RadioGroup,Label, Radio  } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { AtList, AtListItem, AtSearchBar, AtPagination } from 'taro-ui'
+import { AtForm, AtInput, AtButton, AtTextarea } from 'taro-ui'
 import './wish.scss'
 
 // #region 书写注意
@@ -70,7 +70,35 @@ class Wish extends Component {
   constructor() {
     super(...arguments)
     this.state = {
-      current: 0
+      current: 0,
+      list: [
+        {
+          value: '发票',
+          text: '发票',
+          checked: false
+        },
+        {
+          value: '京东优惠卷',
+          text: '京东优惠卷',
+          checked: true
+        },
+        {
+          value: '天猫优惠卷',
+          text: '天猫优惠卷',
+          checked: false
+        },
+        {
+          value: '苏宁优惠卷',
+          text: '苏宁优惠卷',
+          checked: false
+        },
+        {
+          value: '其他',
+          text: '其他',
+          checked: false
+        }
+        
+      ]
     }
   }
 
@@ -90,30 +118,49 @@ class Wish extends Component {
       current: value
     })
   }
+  handleChange(value) {
+    this.setState({
+      value
+    })
+  }
+  onSubmit(event) {
+    console.log(event)
+  }
+  onReset(event) {
+    console.log(event)
+  }
   render() {
     return (
       <View className='index'>
-         <AtList>
-          <AtListItem
-            title='京东-物品-100元'
-            arrow='down'
-            thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
-          />
-          <AtListItem
-            title='苏宁-其他-200元'
-            note='苏宁平台礼品卷,拼单'
-            arrow='down'
-            thumb='http://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
-          />
-          <AtListItem
-            title='票 加油票 500元'
-            note='描述信息'
-            extraText='详情'
-            arrow='down'
-            thumb='http://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png'
-          />
-        </AtList>
-        
+        <view>
+          <view>总数:100</view>
+          <view><Button plain size='mini' type='primary'>添加</Button></view>
+        </view>
+        <view>
+          <AtForm onSubmit={this.onSubmit.bind(this)} onReset={this.onReset.bind(this)}>
+            <View className='radio-list'>
+              <RadioGroup>
+                {this.state.list.map((item, _) => {
+                  return (
+                      <Radio  value={item.value} checked={item.checked}>{item.text}</Radio>
+                  )
+                })}
+              </RadioGroup>
+            </View>
+            <AtInput
+              name=''
+              type='number'
+              placeholder='票卷金额'
+              onChange={this.handleChange.bind(this)} />
+
+            <AtTextarea
+              value=''
+              onChange={() => { }}
+              maxLength={200} placeholder="描述信息" />
+            <AtButton size="normal" formType='submit' className='middle'>提交</AtButton>
+            <AtButton size="normal" formType='reset' className='middle'>重置</AtButton>
+          </AtForm>
+        </view>
 
       </View>
     )

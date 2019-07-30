@@ -125,8 +125,8 @@ class Index extends Component {
           fixed
           tabList={[
             { title: '首页', iconType: 'home' },
-            { title: '有卷', iconType: 'money' },
-            { title: '要卷', iconType: 'shopping-bag' },
+            { title: '列表', iconType: 'money' },
+            { title: '送卷', iconType: 'shopping-bag' },
             { title: '我的', iconType: 'home' }
           ]}
           onClick={this.handleClick.bind(this)}
